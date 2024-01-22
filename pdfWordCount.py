@@ -30,3 +30,16 @@ with open('Nature_Bio.pdf', 'rb') as in_file:
     for page in PDFPage.create_pages(doc):
         interpreter.process_page(page)
 
+text = output_string.getvalue()
+
+tokens = word_tokenize(text) 
+
+punctuations = ['.','(',')',';',':','[',']',','] 
+
+keywords1 = [word for word in tokens if not word in punctuations] # remove punctuation
+keywords = [word for word in keywords1 if not containsNumber(word)] # remove all numbers
+
+print(keywords)
+print(len(keywords))
+
+
