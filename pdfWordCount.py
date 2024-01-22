@@ -43,3 +43,32 @@ print(keywords)
 print(len(keywords))
 
 
+'''
+import PyPDF2
+import nltk
+nltk.download('punkt')
+from nltk.tokenize import word_tokenize 
+
+filename = 'Nature_Bio.pdf'  
+pdfFileObj = open(filename,'rb') 
+
+pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
+
+num_of_pages = pdfReader.numPages 
+count = 0 
+text = "" 
+
+while count < num_of_pages: 
+    pageObj = pdfReader.getPage(count) 
+    count +=1 
+    text += pageObj.extractText()
+    print(pageObj)
+
+tokens = word_tokenize(text) 
+
+punctuations = ['.','(',')',';',':','[',']',','] 
+
+keywords = [word for word in tokens if not word in punctuations] 
+
+print(text)
+'''
