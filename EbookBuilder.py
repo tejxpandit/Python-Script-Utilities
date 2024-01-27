@@ -35,3 +35,33 @@ book.set_cover("image.jpg", open('temp\cover.jpg', 'rb').read())
 spine = ["cover", "nav"]
 toc = ()
 
+# Assemble Chapters
+for c in range(chapters):
+    title = chapter_titles[c]
+    text = chapter_text[c]
+    
+    chap = epub.EpubHtml(title=title, 
+                         file_name=("chap" + str(c) + ".xhtml"),
+                         lang='en')
+    
+    
+    paragraphs = text.split("\n\n")
+    #print(paragraphs)
+    
+    html = "<h1>" + title + "</h1>"
+    for para in paragraphs:
+        html += "<p>" + para + "</p>"
+
+    chap.set_content(html)
+    book.add_item(chap)
+    spine.append(chap)
+    toc += (epub.Link("chap" + str(c) + ".xhtml", title, "chap" + str(c)),)
+
+book.toc = toc
+book.add_item(epub.EpubNcx())
+book.add_item(epub.EpubNav())
+book.spine = spine
+
+epub.write_epub('My Ebook.epub', book, {})
+
+print("Ebook created successfully!")
