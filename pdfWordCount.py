@@ -3,7 +3,7 @@
 # Date : September, 2021
 
 from io import StringIO
-import nltk
+# import nltk
 # nltk.download('punkt') # --> for first time only
 from nltk.tokenize import word_tokenize 
 
@@ -39,9 +39,15 @@ punctuations = ['.','(',')',';',':','[',']',',']
 keywords1 = [word for word in tokens if not word in punctuations] # remove punctuation
 keywords = [word for word in keywords1 if not containsNumber(word)] # remove all numbers
 
+# Special Section to ignore everything before Abstract
+start_idx = keywords.index('Abstract')
+
+# Special Section to ignore everything after References
+stop_idx = keywords.index('References')
+
 print(keywords)
 print(len(keywords))
-
+print(stop_idx - start_idx)
 
 '''
 import PyPDF2
