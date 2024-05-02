@@ -10,7 +10,7 @@ tokenizer = RegexpTokenizer(r'\w+')
 words = []
 
 # Extract Tokens from PDF
-for page_layout in extract_pages("Nature_Neuromorphic_Computing_at_Scale__Final_.pdf"):
+for page_layout in extract_pages("Document.pdf"):
     for element in page_layout:
         if isinstance(element, LTTextContainer):
             # print(element.get_text())
@@ -42,3 +42,16 @@ print(len(words[start_idx:stop_idx]))
 word_count = (stop_idx - start_idx) - offset_boxes
 print("The Word Count is " + str(word_count) + " words")
 
+# CONVERT PDF TO HTML
+# import shutil
+# from io import StringIO
+# from pdfminer.high_level import extract_text_to_fp
+# from pdfminer.layout import LAParams
+# output_string = StringIO()
+# with open('Nature_Neuromorphic_Computing_at_Scale__Final_.pdf', 'rb') as fin:
+#     extract_text_to_fp(fin, output_string, laparams=LAParams(),
+#                        output_type='html', codec=None)
+    
+# with open('nature.html', 'w', encoding='utf-8') as fd:
+#     output_string.seek(0)
+#     shutil.copyfileobj(output_string, fd)
